@@ -12,7 +12,7 @@ from utils.buffer import ReplayBuffer
 from utils.env_wrappers import SubprocVecEnv, DummyVecEnv
 from algorithms.maddpg import MADDPG
 
-USE_CUDA = False  # torch.cuda.is_available()
+USE_CUDA = True  # torch.cuda.is_available()
 
 def make_parallel_env(env_id, n_rollout_threads, seed, discrete_action):
     def get_env_fn(rank):
@@ -125,7 +125,7 @@ if __name__ == '__main__':
     parser.add_argument("--seed",
                         default=1, type=int,
                         help="Random seed")
-    parser.add_argument("--n_rollout_threads", default=1, type=int)
+    parser.add_argument("--n_rollout_threads", default=6, type=int)
     parser.add_argument("--n_training_threads", default=6, type=int)
     parser.add_argument("--buffer_length", default=int(1e6), type=int)
     parser.add_argument("--n_episodes", default=25000, type=int)
